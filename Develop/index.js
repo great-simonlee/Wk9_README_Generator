@@ -20,7 +20,7 @@ function writeToFile(fileName, title) {
 
     var fileNameLower = fileName.toLowerCase().split(' ').join('') + ".md";
     // JSON.stringify(contents, null, '\t')
-    fs.writeFile(fileNameLower, title + '\n' + '\n', function(err) {
+    fs.writeFile(fileNameLower, title + '\n' + '\n' + '\n', function(err) {
         if (err) {return console.log(err);}
         console.log("READ has been generated!!")
     })
@@ -28,11 +28,6 @@ function writeToFile(fileName, title) {
     mdFileName = fileNameLower;
 }
 
-function appendToFile(fileName, subtitle) {
-    fs.appendFile(fileName, writeMdSubTitle(subtitle) + '\n', function(err) {
-        console.log(err);
-    })
-}
 
 function writeMdTitle(title) {
     return `# ${title}`
@@ -42,71 +37,57 @@ function writeMdSubTitle(subTitle) {
     return `## ${subTitle}`
 }
 
-// function writeMdContents(file, ans) {
-//     for (let an of ans) {
-//         let con = "# " +an + '\n';
-//         console.log(file);
-//         console.log(con);
-//     }
 
-// }
-
-// writeMdContents("file", questions)
+function appendToFile(fileName, subtitle, contents) {
+    fs.appendFileSync(fileName, writeMdSubTitle(subtitle) + '\n', function(err) {
+        console.log(err);
+    })
+    fs.appendFileSync(fileName, contents + '\n' + '\n' + '\n', function(err) {
+        console.log(err);
+    })
+}
 
 function inquireUserInput() {
     inquirer.prompt([
         {
             type: "input",
-            name: "title",
+            name: "Title",
             message: questions[0]
         },
         {
             type: "input",
-            name: "description",
+            name: "Description",
             message: questions[1]
         },
-        // {
-        //     type: "input",
-        //     name: "installation",
-        //     message: questions[2]
-        // },
-        // {
-        //     type: "input",
-        //     name: "usage",
-        //     message: questions[3]
-        // },
-        // {
-        //     type: "input",
-        //     name: "constribution",
-        //     message: questions[4]
-        // },
-        // {
-        //     type: "input",
-        //     name: "test",
-        //     message: questions[5]
-        // },
+        {
+            type: "input",
+            name: "Installation",
+            message: questions[2]
+        },
+        {
+            type: "input",
+            name: "Usage",
+            message: questions[3]
+        },
+        {
+            type: "input",
+            name: "Constribution",
+            message: questions[4]
+        },
+        {
+            type: "input",
+            name: "Test",
+            message: questions[5]
+        },
     ]).then(function(data) {
-        writeToFile(data.title, writeMdTitle(data.title));
-        fs.appendFile(mdFileName, "## hihihi", function(err) {console.log(err)});
-        // appendToFile(, "hihi");
-        // Object.keys(data)[1]
-        // console.log(mdFileName);
+        writeToFile(data.Title, writeMdTitle(data.Title));
+
+        for (let i=1; i<Object.keys(data).length; i++) {
+            appendToFile(mdFileName, Object.keys(data)[i], Object.values(data)[i]);
+        }
     });
 }
 
 inquireUserInput();
 
-// // function to write README file
 
-// // function to initialize program
-// function init() {
-//     inquirer.prompt([
-//         {
-//             title: questions[0],
-//             description: questions[1],
-//         }
-//     ]).then(writeToFile(data.title, data));
-// }
-
-// // function call to initialize program
-// init();
