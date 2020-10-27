@@ -13,8 +13,20 @@ const questions = [
     "Installation instructions: ",
     "Usage information: ",
     "Contribution guidelines: ",
-    "Test instructions: "
+    "Test instructions: ",
+    "Any license(s) you want to add?",
+    "Github username?",
+    "Email address?"
 ];
+
+const licenses = {
+    apache: "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
+    boost: "[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)",
+    mit: "[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)",
+    ibm: "[![License: IPL 1.0](https://img.shields.io/badge/License-IPL%201.0-blue.svg)](https://opensource.org/licenses/IPL-1.0)",
+    mozilla: "[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://opensource.org/licenses/MPL-2.0)",
+    isc: "[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)"
+}
 
 function writeToFile(fileName, title) {
 
@@ -25,16 +37,28 @@ function writeToFile(fileName, title) {
     })
 
     mdFileName = fileNameLower;
-}
+};
 
 
 function writeMdTitle(title) {
     return `# ${title}`
-}
+};
 
 function writeMdSubTitle(subTitle) {
     return `## ${subTitle}`
-}
+};
+
+function writeMdListEl(listEl){
+    return `### ${listEl}`
+};
+
+function writeMdGithub(data) {
+    return `[My Github Page: ${data}](https://github.com/${data})`
+};
+
+function writeMdEmail(data) {
+    return  `You can reach out to me via Email: ${data}`
+};
 
 
 function appendToFile(fileName, subtitle, contents) {
@@ -78,12 +102,46 @@ function inquireUserInput() {
             name: "Test",
             message: questions[5]
         },
+        {
+            type: "checkbox",
+            name: "License",
+            message: questions[6],
+            choices: [
+                "apache",
+                "boost",
+                "mit",
+                "ibm",
+                "mozilla",
+                "isc"
+            ]
+        },
+        {
+            type: "input",
+            name: "Github",
+            message: questions[7]
+        },
+        {
+            type: "input",
+            name: "Email",
+            message: questions[8]
+        },
     ]).then(function(data) {
+        // Create a MD file
         writeToFile(data.Title, writeMdTitle(data.Title));
+        // Create a Table of Contents
 
-        for (let i=1; i<Object.keys(data).length; i++) {
+        // Append Licenses
+        for (let i=0; i<data.License.length; i++) {
+            fs.appendFileSync(mdFileName, licenses[`${data.License[i]}`] + '\n', function(err) {console.log(err);});
+        };
+        // Append Sub_Titles and Contents
+        for (let i=1; i<6; i++) {
             appendToFile(mdFileName, Object.keys(data)[i], Object.values(data)[i]);
-        }
+        };
+        // Github Link and Email
+        fs.appendFileSync(mdFileName, writeMdSubTitle("Questions?") + '\n', function(err){console.log(err)});
+        fs.appendFileSync(mdFileName, writeMdGithub(data.Github) + '\n' + '\n', function(err){console.log(err)});
+        fs.appendFileSync(mdFileName, writeMdEmail(data.Email), function(err){console.log(err)})
     });
 }
 
