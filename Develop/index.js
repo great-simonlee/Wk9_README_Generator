@@ -20,9 +20,8 @@ function writeToFile(fileName, title) {
 
     var fileNameLower = fileName.toLowerCase().split(' ').join('') + ".md";
     // JSON.stringify(contents, null, '\t')
-    fs.writeFile(fileNameLower, title + '\n' + '\n' + '\n', function(err) {
+    fs.writeFileSync(fileNameLower, title + '\n' + '\n' + '\n', function(err) {
         if (err) {return console.log(err);}
-        console.log("READ has been generated!!")
     })
 
     mdFileName = fileNameLower;
