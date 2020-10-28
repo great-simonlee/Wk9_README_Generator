@@ -19,6 +19,7 @@ const questions = [
     "Email address?"
 ];
 
+// array of licenses
 const licenses = {
     apache: "[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)",
     boost: "[![License](https://img.shields.io/badge/License-Boost%201.0-lightblue.svg)](https://www.boost.org/LICENSE_1_0.txt)",
@@ -28,10 +29,32 @@ const licenses = {
     isc: "[![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)"
 }
 
+
+// Title
+function writeMdTitle(title) {
+    return `# ${title}`
+};
+
+// Sub_Title
+function writeMdSubTitle(subTitle) {
+    return `## ${subTitle}`
+};
+
+// Github
+function writeMdGithub(data) {
+    return `[My Github Page: ${data}](https://github.com/${data})`
+};
+
+// Email
+function writeMdEmail(data) {
+    return  `You can reach out to me via Email: ${data}`
+};
+
+// Create a markdown file function
 function writeToFile(fileName, title) {
 
     var fileNameLower = fileName.toLowerCase().split(' ').join('') + ".md";
-    // JSON.stringify(contents, null, '\t')
+
     fs.writeFileSync(fileNameLower, title + '\n' + '\n' + '\n', function(err) {
         if (err) {return console.log(err);}
     })
@@ -39,28 +62,7 @@ function writeToFile(fileName, title) {
     mdFileName = fileNameLower;
 };
 
-
-function writeMdTitle(title) {
-    return `# ${title}`
-};
-
-function writeMdSubTitle(subTitle) {
-    return `## ${subTitle}`
-};
-
-function writeMdListEl(listEl){
-    return `#### ${listEl}`
-};
-
-function writeMdGithub(data) {
-    return `[My Github Page: ${data}](https://github.com/${data})`
-};
-
-function writeMdEmail(data) {
-    return  `You can reach out to me via Email: ${data}`
-};
-
-
+// Append Subtitle and Contents function
 function appendToFile(fileName, subtitle, contents) {
     fs.appendFileSync(fileName, writeMdSubTitle(subtitle) + '\n', function(err) {
         console.log(err);
