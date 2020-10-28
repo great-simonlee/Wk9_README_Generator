@@ -49,7 +49,7 @@ function writeMdSubTitle(subTitle) {
 };
 
 function writeMdListEl(listEl){
-    return `### ${listEl}`
+    return `#### ${listEl}`
 };
 
 function writeMdGithub(data) {
@@ -128,11 +128,15 @@ function inquireUserInput() {
     ]).then(function(data) {
         // Create a MD file
         writeToFile(data.Title, writeMdTitle(data.Title));
-        // Create a Table of Contents
 
         // Append Licenses
         for (let i=0; i<data.License.length; i++) {
             fs.appendFileSync(mdFileName, licenses[`${data.License[i]}`] + '\n', function(err) {console.log(err);});
+        };
+        // Create a Table of Contents
+        fs.appendFileSync(mdFileName, writeMdSubTitle("Table of contents") + '\n', function(err){console.log(err)});
+        for (let i=1; i<6; i++) {
+            fs.appendFileSync(mdFileName, `[${i}. ${Object.keys(data)[i]}](##${Object.keys(data)[i]})` + '\n' + '\n', function(err){console.log(err)});
         };
         // Append Sub_Titles and Contents
         for (let i=1; i<6; i++) {
