@@ -67,7 +67,7 @@ function appendToFile(fileName, subtitle, contents) {
     fs.appendFileSync(fileName, writeMdSubTitle(subtitle) + '\n', function(err) {
         console.log(err);
     })
-    fs.appendFileSync(fileName, contents + '\n' + '\n' + '\n', function(err) {
+    fs.appendFileSync(fileName, contents + '\n' + '\n' + '\n' + '\n', function(err) {
         console.log(err);
     })
 }
@@ -148,9 +148,14 @@ function inquireUserInput() {
         fs.appendFileSync(mdFileName, writeMdSubTitle("Questions?") + '\n', function(err){console.log(err)});
         fs.appendFileSync(mdFileName, writeMdGithub(data.Github) + '\n' + '\n', function(err){console.log(err)});
         fs.appendFileSync(mdFileName, writeMdEmail(data.Email), function(err){console.log(err)})
+
+        // Success Message
+        console.log("Markdown file has been successfully created.")
     });
 }
 
 inquireUserInput();
+
+
 
 
