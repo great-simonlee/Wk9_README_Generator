@@ -6,15 +6,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
 ## Table of contents
-[1. Description](##Description)
+[1. Description](#Description)
 
-[2. Installation](##Installation)
+[2. Installation](#Installation)
 
-[3. Usage](##Usage)
+[3. Usage](#Usage)
 
-[4. Constribution](##Constribution)
+[4. Constribution](#Constribution)
 
-[5. Test](##Test)
+[5. Test](#Test)
 
 ## Description
 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia ab, dolorem laborum porro ea libero quo non nulla numquam perspiciatis unde optio corporis, expedita fuga iste blanditiis, perferendis laudantium accusamus? Velit et quo fugit sapiente dolorem. Amet voluptatem architecto magni consequuntur quasi voluptates, quis est asperiores! Minima exercitationem error ducimus!
