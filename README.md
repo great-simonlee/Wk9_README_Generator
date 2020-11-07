@@ -24,7 +24,7 @@ This project is to create a command-line application that dynamically generates 
 
 ## Demo
 
-![Portfolio Demo](https://github.com/great-simonlee/Wk8_PortfolioPageUpdate/blob/main/Portfolio%20Update.gif)
+![Portfolio Demo](https://github.com/great-simonlee/Wk9_README_Generator/blob/main/Develop/README%20Generator.gif)
 
 ## Features
 
